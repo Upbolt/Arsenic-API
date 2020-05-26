@@ -70,7 +70,8 @@ color {
     nougat
     brightYellow
     earthGreen
-}```
+}
+```
 
 Functions 
 ## Functions marked with <YIELD> pause the script until they are finished running.
