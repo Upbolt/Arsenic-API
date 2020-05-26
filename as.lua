@@ -273,6 +273,7 @@ as.colors = colors
 as.setParent = setParent
 as.setValueObject = setValueObject
 as.setCFrame = setCFrame
+as.setPartColor = setPartColor
 as.setModelColor = setModelColor
 as.clone = clone
 as.destroy = destroy
