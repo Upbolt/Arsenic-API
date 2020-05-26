@@ -236,17 +236,19 @@ local function clone(instance, parent, amount)
 end
 
 local function setCFrame(part, cframe)
-    local flag 
-    
-    if not part:FindFirstChild("") then
-        flag = addFlag(part, "IsBuildingMaterial")
-    end
-    
-    fireEvent("ReplicatePart", part, cframe)
-    
-    if flag then
-        flag.remove()
-    end
+    spawn(function()
+        local flag 
+
+        if not part:FindFirstChild("") then
+            flag = addFlag(part, "IsBuildingMaterial")
+        end
+
+        fireEvent("ReplicatePart", part, cframe)
+
+        if flag then
+            flag.remove()
+        end
+    end)
 end
 
 do -- Initialization
