@@ -1,13 +1,12 @@
 # ARSENIC API
-
-## All tables and functions will be under the `as` table.
+***All tables and functions will be under the `as` table.***
 
 ```lua
 as.destroy(game.Players.Gusmanak) 
 as.setPartColor(game.Players.LocalPlayer.Character:FindFirstChild("Left Arm"), as.colors.brightRed)
 ```
 
-Tables
+# Tables
 ```lua
 color {
     hotPink
@@ -73,8 +72,8 @@ color {
 }
 ```
 
-Functions 
-## Functions marked with <YIELD> pause the script until they are finished running.
+# Functions 
+***Functions marked with \<YIELD> pause the script until they are finished running.***
 ```lua
 
 <YIELD> setParent ( instance, newParent )
