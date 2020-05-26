@@ -140,35 +140,37 @@ local function addFlag(instance, name)
 end
 
 local function setModelColor(model, colorCode)
-    local firstPart
-    local modelChildren = model:GetChildren()
-    
-    for i, v in pairs(model:GetChildren()) do
-        if v:IsA("BasePart") then
-            if not firstPart then
-                firstPart = v
-                break
+    spawn(function()
+        local firstPart
+        local modelChildren = model:GetChildren()
+
+        for i, v in pairs(model:GetChildren()) do
+            if v:IsA("BasePart") then
+                if not firstPart then
+                    firstPart = v
+                    break
+                end
             end
         end
-    end
-    
-    if not firstPart then
-        return
-    end
-    
-    local colorCheck = model:FindFirstChild("SecondaryColor")
-    local material = getMaterialId(firstPart.Material)
-    local colorFlag
-    
-    if not colorCheck then
-        colorFlag = addFlag(model, "SecondaryColor")
-    end
-    
-    fireEvent("ColorGun", model, colorCode, material, colorCode, material)
-    
-    if colorFlag then
-        colorFlag.remove()
-    end
+
+        if not firstPart then
+            return
+        end
+
+        local colorCheck = model:FindFirstChild("SecondaryColor")
+        local material = getMaterialId(firstPart.Material)
+        local colorFlag
+
+        if not colorCheck then
+            colorFlag = addFlag(model, "SecondaryColor")
+        end
+
+        fireEvent("ColorGun", model, colorCode, material, colorCode, material)
+
+        if colorFlag then
+            colorFlag.remove()
+        end
+    end)
 end
 
 local cloneBait = {
