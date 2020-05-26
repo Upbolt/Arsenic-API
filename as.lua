@@ -81,7 +81,6 @@ local colors = {
     darkStoneGrey = 64,
     sandRed = 65
 }
-
 local function getMaterialId(material)
     return (material == Enum.Material.Plastic and 1) or table.find(internalMaterials, material)
 end
@@ -133,40 +132,6 @@ local function addFlag(instance, name)
     end
 
     return methods
-end
-
-local function setModelColor(model, colorCode)
-    spawn(function()
-        local firstPart
-        local modelChildren = model:GetChildren()
-
-        for i, v in pairs(model:GetChildren()) do
-            if v:IsA("BasePart") then
-                if not firstPart then
-                    firstPart = v
-                    break
-                end
-            end
-        end
-
-        if not firstPart then
-            return
-        end
-
-        local colorCheck = model:FindFirstChild("SecondaryColor")
-        local material = getMaterialId(firstPart.Material)
-        local colorFlag
-
-        if not colorCheck then
-            colorFlag = addFlag(model, "SecondaryColor")
-        end
-
-        fireEvent("ColorGun", model, colorCode, material, colorCode, material)
-
-        if colorFlag then
-            colorFlag.remove()
-        end
-    end)
 end
 
 local cloneBait = {
@@ -232,6 +197,60 @@ local function clone(instance, parent, amount)
     end
     
     return data
+end
+
+local function setPartColor(part, colorCode)
+    if part.BrickColor.Number == internalColors[colorCode] then
+        return
+    end
+
+    local oldParent = part.Parent
+    local transfer = clone(as.transfer, oldParent).objects[1]
+    local colorFlag = addFlag(transfer, "SecondaryColor")
+    local material = getMaterialId(part.Material)
+
+    setParent(part, transfer)
+    fireEvent("ColorGun", transfer, colorCode, material, colorCode, material)
+    setParent(part, oldParent)
+    destroy(transfer)
+
+    colorFlag.remove()
+
+    repeat wait() until part.BrickColor.Number == internalColors[colorCode]
+end
+
+local function setModelColor(model, colorCode)
+    spawn(function()
+        local firstPart
+        local modelChildren = model:GetChildren()
+
+        for i, v in pairs(model:GetChildren()) do
+            if v:IsA("BasePart") then
+                if not firstPart then
+                    firstPart = v
+                    break
+                end
+            end
+        end
+
+        if not firstPart then
+            return
+        end
+
+        local colorCheck = model:FindFirstChild("SecondaryColor")
+        local material = getMaterialId(firstPart.Material)
+        local colorFlag
+
+        if not colorCheck then
+            colorFlag = addFlag(model, "SecondaryColor")
+        end
+
+        fireEvent("ColorGun", model, colorCode, material, colorCode, material)
+
+        if colorFlag then
+            colorFlag.remove()
+        end
+    end)
 end
 
 local function setCFrame(part, cframe)
