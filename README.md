@@ -1,6 +1,12 @@
 # ARSENIC API
-***All tables and functions will be under the `as` table.***
 
+## How to use
+***First, include this at the top of your script.***
+```lua
+local as = loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Upbolt/Arsenic-API/master/as.lua"))()
+```
+
+***After you do this, all tables and functions will be under the `as` table.***
 Example:
 ```lua
 as.destroy(game.Players.Gusmanak) 
