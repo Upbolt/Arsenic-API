@@ -250,7 +250,7 @@ local function setCFrame(part, cframe)
 end
 
 do -- Initialization
-    as.transfer = clone(ReplicatedStorage.Transfer, game)[1]
+    as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer)[1]
 
     as.setParent = setParent
     as.setValueObject = setValueObject
