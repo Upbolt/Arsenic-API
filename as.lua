@@ -1,5 +1,5 @@
 if as then
-	getgenv().as = nil
+	return
 end
 
 local Players = game:GetService("Players")
