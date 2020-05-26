@@ -259,4 +259,7 @@ as.clone = clone
 as.destroy = destroy
 as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer).objects[1]
 
+as.fireServer = fireServer
+as.fireRemote = fireRemote
+
 return as
