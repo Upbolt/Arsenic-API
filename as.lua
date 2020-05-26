@@ -1,12 +1,8 @@
-if as then
-	return
-end
-
 local Players = game:GetService("Players")
 local Lighting = game:GetService("Lighting")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-getgenv().as = {}
+local as = {}
 
 local remote = workspace.Remote
 local globals = getrenv()._G
@@ -262,3 +258,5 @@ as.setModelColor = setModelColor
 as.clone = clone
 as.destroy = destroy
 as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer).objects[1]
+
+return as
