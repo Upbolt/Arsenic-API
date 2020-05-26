@@ -1,5 +1,5 @@
-if as and as.destroy then
-    as.destroy(as.transfer)
+if as then
+	getgenv().as = nil
 end
 
 local Players = game:GetService("Players")
@@ -208,14 +208,15 @@ local function clone(instance, parent, amount)
                 setParent(clone, parent)
                 destroy(child)
                 
-                objects[objectIterator] = clone
                 objectIterator = objectIterator + 1
+                objects[objectIterator] = clone
                 
                 if objectIterator >= amount then
                     setParent(instance, ogParent)
                     setParent(bait, Lighting.LootDrops)
                     
                     cloneEvent:Disconnect()
+                    cloneYield = false
                 end
             end
         end
@@ -253,13 +254,10 @@ local function setCFrame(part, cframe)
     end)
 end
 
-do -- Initialization
-    as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer)[1]
-
-    as.setParent = setParent
-    as.setValueObject = setValueObject
-    as.setCFrame = setCFrame
-    as.setModelColor = setModelColor
-    as.clone = clone
-    as.destroy = destroy
-end
+as.colors = colors
+as.setParent = setParent
+as.setValueObject = setValueObject
+as.setCFrame = setCFrame
+as.setModelColor = setModelColor
+as.clone = clone
+as.destroy = destroy
