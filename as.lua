@@ -261,3 +261,4 @@ as.setCFrame = setCFrame
 as.setModelColor = setModelColor
 as.clone = clone
 as.destroy = destroy
+as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer).objects[1]
