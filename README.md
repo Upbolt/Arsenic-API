@@ -83,24 +83,27 @@ color {
 ***Functions marked with \<YIELD> pause the script until they are finished running.***
 ```lua
 
-<YIELD> setParent ( instance, newParent )
+<YIELD> setParent ( instance, newParent: Instance )
     ~ Sets the parent of "instance" to "newParent"
 
 <YIELD> destroy ( instance )
     ~ Sets the parent of "instance" to nil
 
-<YIELD> setValueObject ( valueObject, newValue )
+<YIELD> setValueObject ( valueObject, newValue: any )
     ~ If "valueObject" is a valid ValueObject (StringValue, NumberValue, Color3Value, etc.), its value will be set to "newValue"
 
 setCFrame ( part, cframe )
     ~ Sets the CFrame of "part" to cframe
 
-<YIELD> setPartColor ( part, colorId )
+<YIELD> setEnabled ( instance, flag: boolean )
+    ~ Sets the Enabled property of "instance" to "flag"
+
+<YIELD> setPartColor ( part, colorId: number )
     ~ Sets the color of "part" to "colorId" (Use as.colors to select a color!)
 
-setModelColor ( model, colorId )
+setModelColor ( model, colorId: number )
     ~ Sets the color of parts inside "model" to "colorId" (Use as.colors to select a color!)
 
-<YIELD> clone ( instance, newParent, count = 1 )
+<YIELD> clone ( instance, newParent: Instance, count: number = 1 )
     ~ Clones "instance", with "count" amount (defaults to 1), and sets the parent to "newParent"
 ```
