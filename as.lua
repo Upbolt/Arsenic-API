@@ -323,9 +323,15 @@ local function setCFrame(part, cframe)
     end)
 end
 
+local function setEnabled(object, flag)
+    fireEvent("SwitchEnabled", flag, object)
+    repeat wait() until object.Enabled == flag
+end
+
 as.colors = colors
 as.setParent = setParent
 as.setValueObject = setValueObject
+as.setEnabled = setEnabled
 as.setCFrame = setCFrame
 as.setPartColor = setPartColor
 as.setPartMaterial = setPartColor
@@ -336,6 +342,6 @@ as.destroy = destroy
 as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer).objects[1]
 
 as.fireServer = fireServer
-as.fireRemote = fireRemote
+as.fireEvent = fireEvent
 
 return as
