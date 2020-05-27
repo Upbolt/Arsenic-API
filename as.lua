@@ -219,6 +219,26 @@ local function setPartColor(part, colorCode)
     repeat wait() until part.BrickColor.Number == internalColors[colorCode]
 end
 
+local function setPartColor(part, material)
+    if part.Material == material then
+        return
+    end
+
+    local oldParent = part.Parent
+    local transfer = clone(as.transfer, oldParent).objects[1]
+    local colorFlag = addFlag(transfer, "SecondaryColor")
+    material = getMaterialId(material)
+
+    setParent(part, transfer)
+    fireEvent("ColorGun", transfer, 0, material, 0, material)
+    setParent(part, oldParent)
+    destroy(transfer)
+
+    colorFlag.remove()
+
+    repeat wait() until part.BrickColor.Number == internalColors[colorCode]
+end
+
 local function setModelColor(model, colorCode)
     spawn(function()
         local firstPart
@@ -253,6 +273,40 @@ local function setModelColor(model, colorCode)
     end)
 end
 
+local function setModelMaterial(model, material)
+    spawn(function()
+        local firstPart
+        local modelChildren = model:GetChildren()
+
+        for i, v in pairs(model:GetChildren()) do
+            if v:IsA("BasePart") then
+                if not firstPart then
+                    firstPart = v
+                    break
+                end
+            end
+        end
+
+        if not firstPart then
+            return
+        end
+
+        local colorCheck = model:FindFirstChild("SecondaryColor")
+        local material = getMaterialId(material)
+        local colorFlag
+
+        if not colorCheck then
+            colorFlag = addFlag(model, "SecondaryColor")
+        end
+
+        fireEvent("ColorGun", model, 0, material, 0, material)
+
+        if colorFlag then
+            colorFlag.remove()
+        end
+    end)
+end
+
 local function setCFrame(part, cframe)
     spawn(function()
         local flag 
@@ -274,7 +328,9 @@ as.setParent = setParent
 as.setValueObject = setValueObject
 as.setCFrame = setCFrame
 as.setPartColor = setPartColor
+as.setPartMaterial = setPartColor
 as.setModelColor = setModelColor
+as.setModelMaterial = setModelColor
 as.clone = clone
 as.destroy = destroy
 as.transfer = clone(ReplicatedStorage.Transfer, Players.LocalPlayer).objects[1]
