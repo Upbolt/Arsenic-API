@@ -311,7 +311,7 @@ local function setCFrame(instance, cframe)
     spawn(function()
         local flag 
 
-        if not part:FindFirstChild("") then
+        if not instance:FindFirstChild("IsBuildingMaterial") then
             flag = addFlag(instance, "IsBuildingMaterial")
         end
         
