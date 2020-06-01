@@ -307,16 +307,20 @@ local function setModelMaterial(model, material)
     end)
 end
 
-local function setCFrame(part, cframe)
+local function setCFrame(instance, cframe)
     spawn(function()
         local flag 
 
         if not part:FindFirstChild("") then
-            flag = addFlag(part, "IsBuildingMaterial")
+            flag = addFlag(instance, "IsBuildingMaterial")
         end
-
-        fireEvent("ReplicatePart", part, cframe)
-
+        
+        if instance:IsA("BasePart") then
+            fireEvent("ReplicatePart", instance, cframe)
+        elseif instance:IsA("Model") then
+            fireEvent("ReplicateModel", instance, cframe)
+        end
+        
         if flag then
             flag.remove()
         end
